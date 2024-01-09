@@ -162,7 +162,7 @@ urano = Planeta(3.5 * Planeta.AU, 0, 25362 * 300, 'green', 14.6 * masa_tierra, '
 neptuno = Planeta(-4 * Planeta.AU, 0, 24622 * 300, 'cyan', 17.2 * masa_tierra, 'Neptuno')
 
 test = Planeta(-4.5 * Planeta.AU, 0, 69911 * 300, 'black', 318 * masa_tierra, 'Test')
-test1 = Planeta(--4.8 * Planeta.AU, 0, 58232 * 300, 'yellow', 95 * masa_tierra, 'test1')
+test1 = Planeta(-4.8 * Planeta.AU, 0, 58232 * 300, 'yellow', 95 * masa_tierra, 'test1')
 test2 = Planeta(5.3 * Planeta.AU, 0, 25362 * 300, 'darkblue', 14.6 * masa_tierra, 'test2')
 test3 = Planeta(-5.8 * Planeta.AU, 0, 24622 * 300, 'beige', 17.2 * masa_tierra, 'test3')
 
