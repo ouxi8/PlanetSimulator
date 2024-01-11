@@ -5,7 +5,7 @@ import numpy as np
 class Planeta:
     AU = 149.6e6 * 1000  # Unidades: m     Unidades astronomicas
     G = 6.67428e-11  # Constante gravitacional
-    TIMESTEP = 60 * 60 * 24 * 5  # Salto de tiempo en el cual vamos a ejecutar los metodos numericos
+    TIMESTEP = 60 * 60 * 24 * 1  # Salto de tiempo en el cual vamos a ejecutar los metodos numericos
 
     def __init__(self, x: float, y: float, radio: float, color: str, masa: float, nombre: str) -> None:
         """
@@ -184,7 +184,6 @@ planetas.append(test3)
 # Calculamos el tamaño de los ejes en funcion del planeta mas grande
 tamano_ejes = 0
 for planeta in planetas:
-    print(planeta.x)
     if abs(planeta.x) > tamano_ejes:
         tamano_ejes = planeta.x if planeta.x > 0 else -planeta.x
 tamano_ejes *= 1.1 / Planeta.AU
