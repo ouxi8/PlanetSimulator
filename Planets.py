@@ -140,16 +140,15 @@ def calculo_velocidad_circular(constante_gravitacional: float, masa: float, dist
 # Example usage:
 sol = Planeta(0, 0, 696340 * 25, 'orange', 3.955e30, 'Sun')
 sol.es_el_sol = True
-mercury = Planeta(0.387 * Planeta.AU, 0, 2489.7 * 1000, 'gray', 3.30e23, 'Mercury')
-venus = Planeta(-0.723 * Planeta.AU, 0, 6051.8 * 1000, 'yellow', 4.8685e24, 'Venus')
-tierra = Planeta(1 * Planeta.AU, 0, 6371 * 1000, 'blue', 5.972e24, 'Earth')
-marte = Planeta(-1.524 * Planeta.AU, 0, 3389.5 * 1000, 'brown', 6.39e24, 'Mars')
 
+mercury = Planeta(0.387 * Planeta.AU, 0, 2489.7 * 1000, 'gray', 3.30e23, 'Mercury')
+venus = Planeta(-0.723 * Planeta.AU, 0, 6051.8 * 1000, 'gold', 4.8685e24, 'Venus')
+tierra = Planeta(1 * Planeta.AU, 0, 6371 * 1000, 'dodgerblue', 5.972e24, 'Earth')
+marte = Planeta(-1.524 * Planeta.AU, 0, 3389.5 * 1000, 'brown', 6.39e24, 'Mars')
 mercury.y_vel = calculo_velocidad_circular(Planeta.G, sol.mass, mercury.distancia_al_sol)
 venus.y_vel = -calculo_velocidad_circular(Planeta.G, sol.mass, venus.distancia_al_sol)
 tierra.y_vel = calculo_velocidad_circular(Planeta.G, sol.mass, tierra.distancia_al_sol)
 marte.y_vel = -calculo_velocidad_circular(Planeta.G, sol.mass, marte.distancia_al_sol)
-
 planetas = [sol, tierra, marte, mercury, venus]
 
 # Estos planetas no usamos las distancias y radios reales ya que son numeros muy grandes
@@ -160,42 +159,44 @@ jupiter = Planeta(2.1 * Planeta.AU, 0, 69911 * 300, 'pink', 318 * masa_tierra, '
 saturno = Planeta(-2.9 * Planeta.AU, 0, 58232 * 300, 'violet', 95 * masa_tierra, 'Venus')
 urano = Planeta(3.5 * Planeta.AU, 0, 25362 * 300, 'green', 14.6 * masa_tierra, 'Urano')
 neptuno = Planeta(-4 * Planeta.AU, 0, 24622 * 300, 'cyan', 17.2 * masa_tierra, 'Neptuno')
-
-test = Planeta(-4.5 * Planeta.AU, 0, 69911 * 300, 'black', 318 * masa_tierra, 'Test')
-test1 = Planeta(-4.8 * Planeta.AU, 0, 58232 * 300, 'yellow', 95 * masa_tierra, 'test1')
-test2 = Planeta(5.3 * Planeta.AU, 0, 25362 * 300, 'darkblue', 14.6 * masa_tierra, 'test2')
-test3 = Planeta(-5.8 * Planeta.AU, 0, 24622 * 300, 'beige', 17.2 * masa_tierra, 'test3')
-
-test.y_vel = calculo_velocidad_circular(Planeta.G, sol.mass, jupiter.distancia_al_sol)
-test1.y_vel = -calculo_velocidad_circular(Planeta.G, sol.mass, saturno.distancia_al_sol)
-test2.y_vel = calculo_velocidad_circular(Planeta.G, sol.mass, urano.distancia_al_sol)
-test3.y_vel = -calculo_velocidad_circular(Planeta.G, sol.mass, neptuno.distancia_al_sol)
-
 jupiter.y_vel = calculo_velocidad_circular(Planeta.G, sol.mass, jupiter.distancia_al_sol)
 saturno.y_vel = -calculo_velocidad_circular(Planeta.G, sol.mass, saturno.distancia_al_sol)
 urano.y_vel = calculo_velocidad_circular(Planeta.G, sol.mass, urano.distancia_al_sol)
 neptuno.y_vel = -calculo_velocidad_circular(Planeta.G, sol.mass, neptuno.distancia_al_sol)
-
 planetas.append(jupiter)
 planetas.append(saturno)
 planetas.append(urano)
 planetas.append(neptuno)
 
+test = Planeta(-4.5 * Planeta.AU, 0, 69911 * 300, 'blue', 318 * masa_tierra, 'Test 0')
+test1 = Planeta(-4.8 * Planeta.AU, 0, 58232 * 300, 'red', 95 * masa_tierra, 'Test 1')
+test2 = Planeta(5.3 * Planeta.AU, 0, 25362 * 300, 'goldenrod', 14.6 * masa_tierra, 'Test 2')
+test3 = Planeta(-6 * Planeta.AU, 0, 24622 * 300, 'purple', 17.2 * masa_tierra, 'Test 3')
+test.y_vel = calculo_velocidad_circular(Planeta.G, sol.mass, jupiter.distancia_al_sol)
+test1.y_vel = -calculo_velocidad_circular(Planeta.G, sol.mass, saturno.distancia_al_sol)
+test2.y_vel = calculo_velocidad_circular(Planeta.G, sol.mass, urano.distancia_al_sol)
+test3.y_vel = -calculo_velocidad_circular(Planeta.G, sol.mass, neptuno.distancia_al_sol)
 planetas.append(test)
 planetas.append(test1)
 planetas.append(test2)
 planetas.append(test3)
 
-tamano_ejes = 6
+# Calculamos el tamaño de los ejes en funcion del planeta mas grande
+tamano_ejes = 0
+for planeta in planetas:
+    if abs(planeta.x) > tamano_ejes:
+        tamano_ejes = planeta.x if planeta.x > 0 else -planeta.x
+tamano_ejes *= 1.1 / Planeta.AU
+
 # Create a Matplotlib plot
-plt.figure(figsize=(10, 10))
+plt.figure(figsize=(12, 8))
 ax = plt.gca()
 
 for i in range(5000):
     ax.cla()  # Limpiamos la grafica
 
-    esquina_x = -8.5 * Planeta.AU
-    esquina_y = 5.5 * Planeta.AU
+    esquina_x = -1.8 * tamano_ejes * Planeta.AU
+    esquina_y = 0.8 * tamano_ejes * Planeta.AU
 
     for planeta in planetas:
         # Pintamos todos los planetas
@@ -217,8 +218,8 @@ for i in range(5000):
 
             # Añadimos etiquetas en la esquina superior izquierda en donde muestre la distancia de cada planeta al sol
             distance_text = f"{planeta.name}: {planeta.distancia_al_sol:.5e} m"
-            ax.text(esquina_x, esquina_y, distance_text, ha='left', va='bottom', color=planeta.color)
-            esquina_y -= 0.3 * Planeta.AU  # Bajamos la siguiente etiqueta para que no se superpongan
+            ax.text(esquina_x, esquina_y, distance_text, ha='left', va='bottom', color=planeta.color, fontsize=12)
+            esquina_y -= tamano_ejes * 0.08 * Planeta.AU  # Bajamos la siguiente etiqueta para que no se superpongan
 
     ax.set_aspect('equal')  # Set the aspect ratio to 'equal'
     ax.set_xlim(-tamano_ejes * Planeta.AU, tamano_ejes * Planeta.AU)  # Limites del eje x
